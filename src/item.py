@@ -1,5 +1,4 @@
 import csv
-import os
 
 
 class Item:
@@ -17,7 +16,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
 
@@ -29,7 +28,7 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        return f"{self.name}: {self.price}\n{self.quantity}"
+        return f"{self.__name}: {self.price} {self.quantity}"
 
     def apply_discount(self) -> float:
         """
@@ -38,21 +37,34 @@ class Item:
         self.price = float(self.price * self.pay_rate)
         return self.price
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.__name}', {self.price} {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
+
     @property
     def get_name(self):
-        return self.name
+        return self.__name
 
-    def set_name(self, value):
-        if self.name > value:
-            return f"Наименование товара должно содержать {value}"
-        return self.name
+    def name(self):
+        return self.__name
+
+    def set_name(self, name):
+        if len(name) < 11:
+            self.__name = name
+        else:
+            raise ValueError('Длинная наименования товаров превышает 10 символов.')
 
     @classmethod
     def instantiate_from_csv(cls):
         with open('../homework-2/items.csv', 'r', encoding='windows-1251') as file:
-            data = csv.reader(file)
-            for row in data:
-                cls.all.append(row)
+            item = csv.DictReader(file)
+            for i in item:
+                name = i["name"]
+                price = cls.string_to_number(i["price"])
+                quantity = cls.string_to_number(i["quantity"])
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(any_string: str) -> int:
