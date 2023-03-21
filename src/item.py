@@ -16,7 +16,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        self.name = name
         self.price = price
         self.quantity = quantity
 
@@ -28,7 +28,7 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        return f"{self.__name}: {self.price} {self.quantity}"
+        return f"{self.name}: {self.price} {self.quantity}"
 
     def apply_discount(self) -> float:
         """
@@ -38,21 +38,21 @@ class Item:
         return self.price
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}('{self.__name}', {self.price} {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price} {self.quantity})"
 
     def __str__(self):
-        return f"{self.__name}"
+        return f"{self.name}"
 
     @property
     def get_name(self):
-        return self.__name
+        return self.name
 
     def name(self):
-        return self.__name
+        return self.name
 
     def set_name(self, name):
         if len(name) < 11:
-            self.__name = name
+            self.name = name
         else:
             raise ValueError('Длинная наименования товаров превышает 10 символов.')
 
