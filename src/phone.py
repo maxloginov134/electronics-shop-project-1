@@ -1,9 +1,10 @@
 from src.item import Item
+import descriptors
 
 
 class Phone(Item):
 
-    number_of_sim = 2
+    number_of_sim = descriptors.SimCardValue()
 
     def __init__(self, name: str, price: float, quantity: int, number_of_sim: int):
         super().__init__(name, price, quantity)
