@@ -4,19 +4,19 @@ from src.item import Item
 class MixLanguages:
 
     def __init__(self, language='EN'):
-        self.__language = language
+        self._language = language
 
     def change_lang(self):
-        if self.__language == 'EN':
-            self.__language = 'RU'
+        if self.language == 'EN':
+            self._language = 'RU'
             return self
         else:
-            self.__language = 'EN'
+            self._language = 'EN'
             return self
 
     @property
     def language(self):
-        return self.__language
+        return self._language
 
 
 class KeyBoard(Item, MixLanguages):
