@@ -30,6 +30,11 @@ def test_repr(item):
     assert repr(item) == "Item('Смартфон', 10000 20)"
 
 
+def test_normal_add(item):
+    test_item = Item("Телефон", 10000, 3)
+    assert item + test_item == 23
+
+
 
 
 
